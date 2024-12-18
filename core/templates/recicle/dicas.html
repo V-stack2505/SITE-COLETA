@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dicas de Reciclagem</title>
+    <link rel="stylesheet" href="{% static 'css/dicas.css' %}">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
+        <nav>
+            <ul class="menu">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'dicas' %}">Dicas de Reciclagem</a></li>
+                <li><a href="{% url 'parceiros' %}">Parceiros</a></li>
+                <li><a href="#">Sobre Nós</a></li>
+            </ul>
+        </nav>
+
+        <button class="hamburger" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="msg">
+        {% if user.is_authenticated %}
+            <p>Bem-vindo(a), {{ user.get_full_name|default:user.username }}!</p>
+            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">Sair</button>
+            </form>
+        {% else %}
+            <form action="{% url 'login' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Usuário" required>
+                <input type="password" name="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+        {% endif %}
+        </div>
+    </header>
+    
+    <main>
+        <!-- Primeira seção -->
+        <section class="intro">
+            <h1>Dicas de Reciclagem</h1>
+            <p>A reciclagem é um dos pilares mais importantes da sustentabilidade e da preservação ambiental. Ela consiste no processo de transformar materiais descartados em novos produtos, reduzindo o consumo de recursos naturais e minimizando o impacto ambiental causado pelo lixo. Por meio da reciclagem, itens que seriam descartados em aterros sanitários ou na natureza, como papel, plástico, vidro e metal, ganham uma nova vida útil, contribuindo para a redução da poluição e o combate às mudanças climáticas.
+
+                Além de beneficiar o meio ambiente, a reciclagem também desempenha um papel social e econômico significativo. Ela gera empregos, promove a educação ambiental e incentiva a adoção de práticas mais conscientes. Ao separar os resíduos corretamente e apoiar iniciativas de reciclagem, cada indivíduo pode contribuir para a construção de um futuro mais sustentável e equilibrado. Reciclar não é apenas um ato de responsabilidade; é um compromisso com o planeta e as próximas gerações.</p>
+        </section>
+
+        <!-- Segunda seção -->
+        <section class="tips">
+            <div class="tip">
+                <img src="{% static 'images/reciclagem-papel.jpg' %}" alt="Reciclagem de Papel">
+                <h2>Reciclagem de Papel</h2>
+                <p>A reciclagem de papel transforma materiais descartados, como jornais, revistas, caixas de papelão e folhas usadas,
+                     em novos produtos, como cadernos, embalagens ou papel de escritório. Esse processo preserva florestas,
+                      reduzindo a necessidade de extração de madeira, além de diminuir o volume de resíduos enviados para aterros sanitários.
+                    Além de ser um processo ambientalmente sustentável, a reciclagem de papel consome menos energia e água em comparação com a produção de papel a partir de matérias-primas virgens.
+                     É uma solução eficiente para combater o desperdício e estimular a economia circular.</p>
+            </div>
+            <div class="tip">
+                <img src="{% static 'images/reciclagem-plastico_1000x1000_27798f29-23b4-4e75-95fe-e7240115a2de_1024x.jpg' %}" alt="Reciclagem de Plástico">
+                <h2>Reciclagem de Plástico</h2>
+                <p>Plásticos descartados, como garrafas PET, embalagens, brinquedos e sacolas, passam por processos de limpeza, trituração e transformação em grânulos para fabricação de novos produtos. Itens reciclados podem ser utilizados em novas garrafas, materiais de construção ou até roupas feitas de fibras sintéticas.
+                    A reciclagem de plástico ajuda a reduzir a poluição ambiental e evita que resíduos plásticos cheguem aos oceanos, onde prejudicam a vida marinha. Além disso, promove a economia de petróleo, que é a principal matéria-prima para a produção de plásticos.</p>
+            </div>
+            <div class="tip">
+                <img src="{% static 'images/reciclagem-do-vidro-no-brasil-2-1024x680.jpg' %}" alt="Reciclagem de Vidro">
+                <h2>Reciclagem de Vidro</h2>
+                <p>Vidros descartados, como garrafas, frascos e copos quebrados, são coletados, triturados e derretidos para a produção de novos recipientes ou materiais de construção. O vidro é um material único, pois pode ser reciclado infinitamente sem perda de qualidade ou pureza.
+                    A reciclagem de vidro reduz significativamente o consumo de energia e a emissão de gases de efeito estufa, pois a fusão de vidro reciclado requer menos calor do que a produção a partir de matérias-primas virgens. Isso também diminui a necessidade de exploração de areia e outros recursos naturais.</p>
+            </div>
+            <div class="tip">
+                <img src="{% static 'images/oxma-blog-post-reciclagem-de-metais.jpg' %}" alt="Reciclagem de Metal">
+                <h2>Reciclagem de Metal</h2>
+                <p>Metais como alumínio, aço, cobre e ferro são coletados, separados e processados para a criação de novos produtos, como latas, peças de automóveis e componentes de construção. O alumínio reciclado, por exemplo, economiza até 95% da energia necessária para produzir alumínio novo.
+                    A reciclagem de metais reduz a necessidade de mineração, que é um processo ambientalmente destrutivo e energeticamente intensivo. Além disso, ajuda a evitar o desperdício de materiais valiosos e a diminuir o impacto ambiental associado ao descarte inadequado.</p>
+            </div>
+        </section>
+
+        <!-- Terceira seção -->
+        <section class="call-to-action">
+            <p>"O ambiente é o que somos em nós mesmos. Nós e o ambiente somos dois processos diferentes; nós somos o ambiente e o ambiente somos nós."</p>
+            <h5>Jiddu Krishnamurti</h5>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </footer>
+    <script>
+
+        document.addEventListener("DOMContentLoaded",
+        
+        function () {
+        
+        const hamburger =
+        
+        document.querySelector(".hamburger");
+        
+        const menu = document.querySelector(".menu");
+        hamburger.addEventListener("click", function ()
+        
+        {menu.classList.toggle("show");
+        
+        });
+        });
+        </script>
+</body>
+</html>
+```
